@@ -22,8 +22,6 @@ defmodule ChatAppWeb.ChatLive do
     {:noreply, assign(socket, new_message: message_content)}
   end
 
-  def handle_event("keydown", _, socket), do: {:noreply, socket}
-
   def handle_event("delete_message", %{"id" => id_string}, socket) do
     handle_delete_message(socket, String.to_integer(id_string))
   end
@@ -65,7 +63,6 @@ defmodule ChatAppWeb.ChatLive do
       <form phx-submit="click_send" class="flex items-center">
         <input type="text" name="message" value={@new_message} placeholder="Type a message..." 
           class="flex-1 p-2 bg-gray-700 rounded mr-2 text-gray-300" 
-          phx-keydown="keydown"
           phx-change="message_input"
         />
         <button type="submit" class="bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded">Send</button>
